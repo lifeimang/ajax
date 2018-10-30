@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>ajax登录页面</title>
+    <script src="/static/js/jquery-1.12.4.min.js"></script>
+    <script>
+        $(function () {
+            $('#btnLogin').click(function () {
+            	alert("注意ajax传值的格式");
+                // 获取用户输入的username和password
+                var username = $('#username').val()
+                var password = $('#password').val()
+
+                // 定义一个字典
+                alert('注意不要拼写错误');
+                var params = {'uesrname': username, 'password': password}
+
+                // 发起ajax post请求，访问/login_ajax_check，传递的参数:用户名(username) 密码(password)
+                /*
+                $.ajax({
+                    'url': '/login_ajax_check',
+                    'type': 'post',
+                    'data': params
+                }).success(function (data) {
+                    // 回调函数中根据返回的json数据进行处理
+                    if (data.res == 1){
+                        // 用户名密码正确，跳转到首页
+                        location.href = '/index'
+                    }
+                    else {
+                        // 用户名或密码错误
+                        // location.href = '/login_ajax'
+                        $('#errmsg').text('用户名或密码错误').show()
+                    }
+                })*/
+                $.post('/login_ajax_check', params, function (data) {
+                    // 回调函数中根据返回的json数据进行处理
+                    if (data.res == 1){
+                        // 用户名密码正确，跳转到首页
+                        location.href = '/index'
+                    }
+                    else {
+                        // 用户名或密码错误
+                        // location.href = '/login_ajax'
+                        $('#errmsg').text('用户名或密码错误').show()
+                    }
+                })
+            })
+        })
+    </script>
+    <style>
+        #errmsg {
+            display: none;
+            color: red;
+        }
+    </style>
+</head>
+<body>
+<div>
+    用户名：<input type="text" id="username"><br/>
+    密码：<input type="password" id="password"><br/>
+    <input type="button" id="btnLogin" value="登录"><br/>
+    <div id="errmsg"></div>
+</div>
+</body>
+</html>

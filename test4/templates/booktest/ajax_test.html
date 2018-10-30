@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>ajax请求</title>
+    <script src="/static/js/jquery-1.12.4.min.js"></script>
+    <script>
+        $(function () {
+            // 页面加载完成之后，绑定btnClick按钮的点击事件
+            $('#btnClick').click(function () {
+                // 发起ajax 请求，访问/ajax_handle
+                /*
+                $.ajax({
+                    'url': '/ajax_handle?name=smart', // 请求的url地址
+                    'type': 'get', // 请求方式
+                }).success(function (data) {
+                    // 回调函数
+                    // data中保存就是服务器返回的json数据
+                    alert(data.name)
+                })*/
+                $.get('/ajax_handle?name=smart', function (data) {
+                    // 回调函数
+                    // data中保存就是服务器返回的json数据
+                    alert(data.name)
+                })
+            })
+        })
+    </script>
+</head>
+<body>
+<input type="button" id="btnClick" value="点击发起ajax请求">
+</body>
+</html>
